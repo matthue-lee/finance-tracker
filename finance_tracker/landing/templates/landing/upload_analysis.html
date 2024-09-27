@@ -1,0 +1,28 @@
+<!-- landing/upload_analysis.html -->
+<h1>Transaction Analysis</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Serial</th>
+            <th>Transaction Details</th>
+            <th>Withdrawals</th>
+            <th>Deposits</th>
+            <th>Balance</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in parsed_data %}
+        <tr>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.serial }}</td>
+            <td>{{ transaction.transaction_details }}</td>
+            <td>{{ transaction.withdrawals }}</td>
+            <td>{{ transaction.deposits }}</td>
+            <td>{{ transaction.balance }}</td>
+            <td>{{ transaction.category }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
