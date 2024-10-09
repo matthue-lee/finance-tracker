@@ -1,7 +1,6 @@
-finance_tracker\.venv
-test_data.csv
+finance_tracker_backend\.venv
+finance_tracker_backend\.env
 .venv
-test1.pdf
 .env
-test2.pdf
 nltk_data
+media

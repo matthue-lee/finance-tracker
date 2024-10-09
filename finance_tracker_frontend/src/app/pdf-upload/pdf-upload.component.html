@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Upload a PDF File</h1>
+  
+    <!-- PDF Upload Form -->
+    <form (ngSubmit)="onUpload()">
+      <div class="form-group">
+        <label for="pdfFile">Select PDF file:</label>
+        <input type="file" id="pdfFile" (change)="onFileSelected($event)" accept="application/pdf" class="form-control" required />
+      </div>
+  
+      <!-- Upload Button -->
+      <button type="submit" [disabled]="!selectedFile" class="btn btn-primary">
+        Upload PDF
+      </button>
+    </form>
+  
+    <!-- Display a success or error message -->
+    <div *ngIf="uploadSuccess" class="alert alert-success mt-3">
+      PDF uploaded successfully!
+    </div>
+  
+    <div *ngIf="uploadError" class="alert alert-danger mt-3">
+      Failed to upload PDF. Please try again.
+    </div>
+  </div>
+  

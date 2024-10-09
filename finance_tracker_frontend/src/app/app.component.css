@@ -1,0 +1,32 @@
+/* src/app/app.component.css */
+.sidenav-container {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .content-area {
+    flex: 1; /* Allow this section to grow and take up available space */
+    overflow: auto; /* Add scroll if content overflows */
+    padding: 20px; /* Optional padding */
+  }
+  
+  mat-sidenav {
+    width: 200px;
+    background-color: #f0f0f0; /* Light grey background */
+    border-radius: 0;          /* Remove any rounded corners */
+
+
+  }
+  
+  mat-toolbar {
+    background-color: #3f51b5; /* Adjust toolbar color */
+    color: white;
+  }
+  
