@@ -1,0 +1,49 @@
+@import '../src/styles/variables';
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  .mat-sidenav-container {
+    height: 100%; /* Full height for sidenav container */
+    flex: 1;      /* Make it grow to fill the available space */
+    background-color: $primary-color;
+  
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.mat-sidenav-container .mat-sidenav {
+  background-color: $secondary-color;  /* Set background color */
+  color: $fourth-color;                /* Set text color */
+}
+
+/* You can also customize other elements inside the sidenav */
+.mat-list-item {
+  color: $accent-color;  /* Use the accent color for list items */
+}
+
+.mat-sidenav-container .mat-toolbar {
+  background-color: $secondary-color;  /* Set background color using your custom variable */
+  color: $fourth-color;                /* Set text color using your custom variable */
+}
+
+::ng-deep mat-sidenav .mat-sidenav-container a.mat-list-item {
+  color: $third-color;        /* Set the default link color */
+  text-decoration: none;     /* Remove underline */
+  transition: color 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+::ng-deep mat-sidenav a.mat-list-item:hover {
+  color: $accent-color;  /* Set the hover link color */
+}

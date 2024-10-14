@@ -10,9 +10,8 @@
         <label>{{ category.name }}: </label>
   
         <!-- Vertical Slider -->
-        <div class="slider-wrapper">
-          <input type="range" class="vertical-slider" min="0" max="100">
-        </div>  
+        <input type="range" class="vertical-slider" [(ngModel)]="category.value" (ngModelChange)="onInputChange(category)" min="0"  [max]="category.max"  [disabled]="category.locked">
+        
         <!-- Numerical input field -->
         <input type="number" [(ngModel)]="category.value" (ngModelChange)="onInputChange(category)" min="0"  [max]="category.max" class="number-input"  [disabled]="category.locked">
         

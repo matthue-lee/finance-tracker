@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';  // Import FormsModule
   standalone: true,  // Mark the component as standalone
   imports: [CommonModule, FormsModule],  // Import CommonModule to use *ngIf and *ngFor
   templateUrl: './budget.component.html',
-  styleUrls: ['./budget.component.css']
+  styleUrls: ['./budget.component.scss']
 })
 export class BudgetComponent implements AfterViewInit {
   totalIncome = 1000;  // Initialize with a default total income value
