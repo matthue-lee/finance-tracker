@@ -1,1 +1,35 @@
-<p>transactions works!</p>
+<div class="container">
+    <h2>Spending by Category</h2>
+    <button (click)="refreshTransactions()" class="btn btn-primary">Update Categories</button>
+
+    <div *ngIf="fetchError" class="alert alert-danger">Error fetching CSV data.</div>
+    
+    <div *ngIf="loading" class="loading-container">
+        <mat-spinner></mat-spinner>  <!-- Angular Material spinner -->
+    </div>
+    <!-- Add a canvas element for the chart -->
+    <canvas id="spendingChart"></canvas>
+  
+    <table *ngIf="transactions.length > 0" class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>new category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.Date }}</td>
+          <td>{{ transaction.Description }}</td>
+          <td>{{ transaction.Amount }}</td>
+          <td>{{ transaction.Category }}</td>
+          <td>{{ transaction.NewCategory }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

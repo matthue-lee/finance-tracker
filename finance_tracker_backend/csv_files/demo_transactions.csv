@@ -1,0 +1,38 @@
+Date,Description,Amount,Category,NewCategory
+2024-09-01,Grocery Store Purchase,50.75,Groceries,Uncategorized
+2024-09-03,Rent Payment,1000.00,Housing,/Finance
+2024-09-05,Movie Theater,15.00,Entertainment,/Arts & Entertainment
+2024-09-07,Bus Ticket,2.50,Transport,Uncategorized
+2024-09-08,Restaurant Dinner,60.00,Food & Drink,Uncategorized
+2024-09-09,Electricity Bill,75.00,Utilities,/Finance
+2024-09-10,Coffee Shop,4.50,Food & Drink,Uncategorized
+2024-09-11,Gas Station,45.00,Transport,/Finance
+2024-09-12,Online Shopping,120.00,Shopping,/Finance
+2024-09-13,Water Bill,40.00,Utilities,/Finance
+2024-09-14,Subscription Service,12.99,Entertainment,/Finance
+2024-09-15,Gym Membership,55.00,Health & Fitness,Uncategorized
+2024-09-16,Clothing Store,85.00,Shopping,/Finance
+2024-09-17,Taxi Ride,15.00,Transport,/Finance
+2024-09-18,Grocery Store Purchase,95.25,Groceries,Uncategorized
+2024-09-19,Doctor's Appointment,150.00,Health & Fitness,/Finance
+2024-09-20,Streaming Service,9.99,Entertainment,/Finance
+2024-09-21,Lunch at Cafe,25.00,Food & Drink,Uncategorized
+2024-09-22,Airline Ticket,300.00,Travel,Uncategorized
+2024-09-23,Hotel Stay,150.00,Travel,/Finance
+2024-09-24,Uber Ride,18.50,Transport,Uncategorized
+2024-09-25,Supermarket,120.75,Groceries,Uncategorized
+2024-09-26,Phone Bill,60.00,Utilities,/Finance
+2024-09-27,Concert Tickets,100.00,Entertainment,/Arts & Entertainment
+2024-09-28,Online Electronics Purchase,250.00,Shopping,Uncategorized
+2024-09-29,Cinema,14.00,Entertainment,/Arts & Entertainment
+2024-09-30,Electric Vehicle Charging,25.00,Transport,Uncategorized
+2024-10-01,Internet Bill,50.00,Utilities,/Finance
+2024-10-02,Bookstore,35.00,Shopping,Uncategorized
+2024-10-03,Hair Salon,45.00,Personal Care,Uncategorized
+2024-10-04,Lunch with Friends,30.00,Food & Drink,/Finance
+2024-10-05,Online Course,200.00,Education,Uncategorized
+2024-10-06,Yoga Class,20.00,Health & Fitness,Uncategorized
+2024-10-07,Streaming Subscription,12.99,Entertainment,/Finance
+2024-10-08,Grocery Store Purchase,110.00,Groceries,Uncategorized
+2024-10-09,Rent Payment,1000.00,Housing,/Finance
+2024-10-10,Electricity Bill,80.00,Utilities,/Finance

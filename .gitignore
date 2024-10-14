@@ -1,6 +1,5 @@
-finance_tracker_backend\.venv
-finance_tracker_backend\.env
 .venv
 .env
 nltk_data
 media
+secrets
