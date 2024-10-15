@@ -84,13 +84,32 @@ toggleTotalBudgetLock() {
 
   updateMaxValues() {
     if (this.isTotalBudgetLocked) {
-      // When the total budget is locked, use the locked total allocated value as max
-      this.lockSliders(this.lockedTotalAllocated);
+      // When the budget is locked, calculate available budget
+      const availableBudgetForUnlocked = this.lockedTotalAllocated - this.sumOfLockedSliders();
+  
+      // Set max for each slider based on the available budget
+      this.categories.forEach(category => {
+        if (!category.locked) {
+          category.max = availableBudgetForUnlocked;  // Max for unlocked sliders
+        } else {
+          category.max = category.value;  // Keep the max as the current value for locked sliders
+        }
+      });
     } else {
-      // If unlocked, use the total income as the max
-      this.unlockSliders(this.totalIncome);
+      // If unlocked, all sliders can have max as total income
+      this.categories.forEach(category => {
+        category.max = this.totalIncome;  // Set new max as total income
+      });
     }
   }
+  
+
+  sumOfLockedSliders(): number {
+    return this.categories
+      .filter(category => category.locked)
+      .reduce((acc, category) => acc + category.value, 0);
+  }
+  
   
 
   // Function to lock sliders by setting max to total allocated
