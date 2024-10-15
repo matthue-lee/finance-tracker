@@ -1,11 +1,14 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule for *ngIf and *ngFor
 import { FormsModule } from '@angular/forms';  // Import FormsModule
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list'; // If you're using mat-nav-list
 
 @Component({
   selector: 'app-budget',
   standalone: true,  // Mark the component as standalone
-  imports: [CommonModule, FormsModule],  // Import CommonModule to use *ngIf and *ngFor
+  imports: [CommonModule, FormsModule, MatSidenavModule, MatToolbarModule, MatListModule],  // Import CommonModule to use *ngIf and *ngFor
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss']
 })
@@ -18,7 +21,6 @@ export class BudgetComponent implements AfterViewInit {
     { name: 'Transport', value: 5, locked: false, max: 1000 },
     { name: 'Utilities', value: 5, locked: false, max: 1000 },
     { name: 'Savings', value: 10, locked: false, max: 1000 },
-    { name: 'Dining Out', value: 5, locked: false, max: 1000 },
     { name: 'Miscellaneous', value: 5, locked: false, max: 1000 }
   ];
 
@@ -44,6 +46,13 @@ export class BudgetComponent implements AfterViewInit {
     }
   }
 
+  
+  onIncomeChange() {
+    this.updateTotal();
+    this.updateMaxValues();
+    console.log('Total Income:', this.totalIncome);
+  }
+
   toggleLock(category: any) {
     category.locked = !category.locked; // Toggle the lock state
     this.updateMaxValues(); // Ensure max values are updated when locking/unlocking
@@ -64,10 +73,6 @@ toggleTotalBudgetLock() {
 }
 
 
-  onIncomeChange() {
-    this.updateTotal();
-    this.updateMaxValues();
-  }
 
   ngAfterViewInit() {
     setTimeout(() => {

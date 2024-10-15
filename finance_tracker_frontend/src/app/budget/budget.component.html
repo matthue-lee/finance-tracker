@@ -1,8 +1,8 @@
 <div class="budget-container">
-    <h2>Adjust Your Budget</h2>
+    <h3>Adjust Your Budget</h3>
     
     <label class="label-secondary">Total Income: </label>
-    <input type="number" [(ngModel)]="totalIncome" (ngModelChange)="onIncomeChange()" min="0">
+    <input type="number" class="income-input" [(ngModel)]="totalIncome" (ngModelChange)="onIncomeChange()" min="0">
     
     <div class="sliders-wrapper">
       <!-- Category sliders and input fields -->
