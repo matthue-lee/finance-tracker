@@ -25,11 +25,13 @@ export class BudgetComponent implements AfterViewInit {
   totalAllocated = 0;
   remainingBudget = 0;
   isTotalBudgetLocked = false;
+  lockedTotalAllocated = 0;
 
   onInputChange(category: any) {
     if (!category.locked) {
       this.updateTotal();
-    }if (this.isTotalBudgetLocked) {
+    }
+    if (this.isTotalBudgetLocked) {
       this.adjustUnlockedSliders(category);
     }
   }
@@ -48,12 +50,19 @@ export class BudgetComponent implements AfterViewInit {
   }
 
   // Toggle function for locking/unlocking the total budget
-  toggleTotalBudgetLock() {
-    this.isTotalBudgetLocked = !this.isTotalBudgetLocked;
-    this.updateTotal();
-    this.updateMaxValues();
+// Toggle function for locking/unlocking the total budget
+toggleTotalBudgetLock() {
+  this.isTotalBudgetLocked = !this.isTotalBudgetLocked;
 
+  if (this.isTotalBudgetLocked) {
+    // Lock the total allocated value at the moment of locking
+    this.lockedTotalAllocated = this.totalAllocated;
   }
+
+  // Call updateMaxValues to ensure sliders can adjust within the locked total
+  this.updateMaxValues();
+}
+
 
   onIncomeChange() {
     this.updateTotal();
@@ -75,70 +84,81 @@ export class BudgetComponent implements AfterViewInit {
 
   updateMaxValues() {
     if (this.isTotalBudgetLocked) {
-      // Lock sliders: max is total allocated
-      this.lockSliders();
+      // When the total budget is locked, use the locked total allocated value as max
+      this.lockSliders(this.lockedTotalAllocated);
     } else {
-      // Unlock sliders: max is total income
-      this.unlockSliders();
+      // If unlocked, use the total income as the max
+      this.unlockSliders(this.totalIncome);
     }
   }
+  
 
   // Function to lock sliders by setting max to total allocated
-  lockSliders() {
-    const lockedTotalAllocated = this.totalAllocated;  // Store the current total allocated value
-  
+// Function to lock sliders by setting max to total allocated (or locked total)
+  lockSliders(lockedTotal: number) {
     this.categories.forEach(category => {
-      category.max = lockedTotalAllocated;  // Set max for each slider to the total allocated value
+      category.max = lockedTotal;  // Set max for each slider to the locked total allocated value
       if (category.value > category.max) {
         category.value = category.max;  // Ensure the value doesn't exceed the max
       }
     });
   }
+
   
 
   // Simplified function to unlock sliders (max is total income)
-  unlockSliders() {
-    this.categories.forEach(category => {
-      category.max = this.totalIncome;  // Set new max as total income
-    });
-  }
+// Simplified function to unlock sliders (max is total income)
+unlockSliders(totalIncome: number) {
+  this.categories.forEach(category => {
+    category.max = totalIncome;  // Set new max as total income
+  });
+}
+
 
   adjustUnlockedSliders(changedCategory: any) {
     // Calculate total locked values
     const totalLocked = this.categories.reduce((acc, category) => category.locked ? acc + category.value : acc, 0);
-    console.log('total locked value: ' + totalLocked)
-    // Calculate the budget available for unlocked sliders
-    const availableBudgetForUnlocked = this.totalAllocated - totalLocked;
-    console.log('available for unlocked ' + availableBudgetForUnlocked)
-
-    // Collect all unlocked sliders except the changed one
+  
+    // Calculate the available budget for unlocked sliders
+    const availableBudgetForUnlocked = this.lockedTotalAllocated - totalLocked;
+  
+    // Get all unlocked categories except the one that was just changed
     const unlockedCategories = this.categories.filter(category => !category.locked && category !== changedCategory);
-    console.log('Unlocked Categories:', JSON.stringify(unlockedCategories, null, 2));
+  
+    // If no unlocked categories exist, or there's no available budget, exit early
     if (unlockedCategories.length === 0 || availableBudgetForUnlocked <= 0) {
-      return;  // If no unlocked sliders or no available budget, exit early
+      return;
     }
   
-    // Calculate the total value of the remaining unlocked sliders (excluding the changed one)
+    // Calculate the total value of the remaining unlocked sliders before the change
     const totalUnlockedBeforeChange = unlockedCategories.reduce((acc, category) => acc + category.value, 0);
   
     // Calculate the remaining budget after the change in the current slider
     const remainingBudgetAfterChange = availableBudgetForUnlocked - changedCategory.value;
   
-    // If the change results in exceeding the total allocated budget, cap the slider's value
+    // If the remaining budget is negative, cap the current slider to the available budget
     if (remainingBudgetAfterChange < 0) {
       changedCategory.value = availableBudgetForUnlocked;
       return;
     }
   
-    // Adjust the other unlocked sliders proportionally
-    unlockedCategories.forEach(category => {
-      const proportion = totalUnlockedBeforeChange > 0 ? category.value / totalUnlockedBeforeChange : 1 / unlockedCategories.length;
-      category.value = Math.max(proportion * remainingBudgetAfterChange, 0); // Ensure values don't go below 0
+    // Redistribute the remaining budget proportionally among the other unlocked sliders
+    let totalRounded = 0;
+    unlockedCategories.forEach((category, index) => {
+      if (index === unlockedCategories.length - 1) {
+        // Assign the remaining budget to the last unlocked slider to ensure the sum matches
+        category.value = remainingBudgetAfterChange - totalRounded;
+      } else {
+        // Distribute proportionally
+        const proportion = totalUnlockedBeforeChange > 0 ? category.value / totalUnlockedBeforeChange : 1 / unlockedCategories.length;
+        category.value = Math.round(proportion * remainingBudgetAfterChange);
+        totalRounded += category.value; // Keep track of the rounded total
+      }
     });
   
-    // Update the total allocated value
+    // Update the total allocated value after redistribution
+    this.updateTotal();
   }
-  
   
   
   
